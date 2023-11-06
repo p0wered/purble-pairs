@@ -10,7 +10,7 @@ class GameBoard:
         cards = GameCard.all_cards()
         random.shuffle(self.cards)
 
-    def __str__(self):
+    def __repr__(self):
         return str(self.cards)
 
 

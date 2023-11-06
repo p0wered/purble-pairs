@@ -25,24 +25,27 @@ running = True
 clock = pg.time.Clock()
 cards = GameCard.all_cards()
 random.shuffle(cards)
-shift = 0
 
 
 # экран
 def display_redraw():
-    global shift
+    cycle = 0
+    shift = 0
     display.blit(bg_img, (0, 0))
     for card in cards:
-        shift *= 80
+        if cycle % 4 == 0:
+            shift += 142
+            cycle = 0
+        cycle += 1
         card = str(card)
         if card == 'card_cloud':
-            display.blit(card_cloud, (shift, 0))
-        if card == 'card_tree':
-            display.blit(card_cloud, (shift, 0))
-        if card == 'card_blob':
-            display.blit(card_cloud, (shift, 0))
-        if card == 'card_flower':
-            display.blit(card_cloud, (shift, 0))
+            display.blit(card_cloud, (cycle * 140, shift))
+        elif card == 'card_tree':
+            display.blit(card_tree, (cycle * 140, shift))
+        elif card == 'card_blob':
+            display.blit(card_blob, (cycle * 140, shift))
+        else:
+            display.blit(card_flower, (cycle * 140, shift))
     pg.display.update()
 
 
@@ -56,9 +59,7 @@ def event_processing():
             if event.key == pg.K_q:
                 running = False
         if event.type == pg.MOUSEBUTTONUP:
-            pos = pg.mouse.get_pos()
-            if test_cl.collidepoint(pos):
-                print(cards)
+            print(pg.mouse.get_pos())
     clock.tick(FPS)
     return running
 
