@@ -2,7 +2,7 @@ import random
 
 
 class GameCard:
-    all_types = ['cloud', 'flower', 'tree', 'blob']
+    all_types = ['blue', 'purple', 'red', 'yellow']
 
     def __init__(self, card_type):
         self.card_type = card_type

@@ -2,34 +2,36 @@ import random
 import pygame as pg
 from card import GameCard
 from board import GameBoard
+from gui.board_view import BoardView
+from config import RCS
 
 pg.init()
 
 # параметры
 FPS = 60
-screen_width, screen_height = 1366, 768
-pg.mixer.music.load('src/disco.mp3')
+screen_width, screen_height = 1600, 900
+pg.mixer.music.load(RCS['sound']['ost'])
 pg.mixer.music.play()
 pg.mixer.music.set_volume(0.3)
-pg.display.set_caption('Purble Pairs')
+pg.display.set_caption('Disco Pairs')
+pg.font.SysFont('arial', 36)
 
 # картинки
 bg_img = pg.image.load('src/bg.png')
 
 # переменные
-display = pg.display.set_mode((screen_width, screen_height))
+display = pg.display.set_mode(RCS['display'])
 running = True
 clock = pg.time.Clock()
-cards = GameCard.all_cards()
-random.shuffle(cards)
-positions = []
+RCS['cards'] = GameCard.all_cards()
+random.shuffle(RCS['cards'])
+main_board = GameBoard
 
 
 # экран
 def display_redraw():
     display.blit(bg_img, (0, 0))
-    main_board = GameBoard
-    main_board.render(display, cards, positions)
+    BoardView.render(display)
     pg.display.update()
 
 
@@ -43,7 +45,7 @@ def event_processing():
             if event.key == pg.K_q:
                 running = False
         if event.type == pg.MOUSEBUTTONUP:
-            print('mouse clicked')
+            main_board.delete_card()
     clock.tick(FPS)
     return running
 

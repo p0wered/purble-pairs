@@ -1,39 +1,32 @@
-import random
 import pygame as pg
-from card import GameCard
+from gui.board_view import BoardView
+from config import GEOM, RCS
 
 
 class GameBoard:
-    cards = []
-
-    def __init__(self, cards):
-        cards = GameCard.all_cards()
-        random.shuffle(self.cards)
-
-    def __repr__(self):
-        return str(self.cards)
-
     @staticmethod
-    def render(display, sprites, positions):
-        """Выводит на экран сетку карточек 2х4 в случайном порядке"""
-        card_cloud, card_tree, card_blob, card_flower = pg.image.load('images/blue.png'), pg.image.load('images/red.png'), pg.image.load('images/yellow.png'), pg.image.load('images/purple.png')
-        card_width, card_height = 128, 128
-        st_x, st_y, cycle = 261, 244, 0
-        for item in sprites:
-            if cycle // 4 in [1, 2, 3]:
-                st_x = 261
-                st_y += card_height + 10
-                cycle = 0
-            cycle += 1
-            item = str(item)
-            if len(positions) < 8:
-                positions.append((st_x, st_y))
-            st_x += card_width + 10
-            if item == 'card_cloud':
-                display.blit(card_cloud, (st_x, st_y))
-            elif item == 'card_tree':
-                display.blit(card_tree, (st_x, st_y))
-            elif item == 'card_blob':
-                display.blit(card_blob, (st_x, st_y))
-            else:
-                display.blit(card_flower, (st_x, st_y))
+    def delete_card():
+        """Удаляет две выбранные одинаковые карточки"""
+        pos = pg.mouse.get_pos()
+        for i, position in enumerate(RCS['positions']):
+            col_card = pg.Rect(position, (GEOM['card_width'], GEOM['card_height']))
+            if col_card.collidepoint(pos):
+                RCS['clicked'].append(i)
+                print(f'Выбрана карточка {RCS["cards"][i]}')
+                if len(RCS['clicked']) == 2:
+                    i1 = RCS['clicked'][0]
+                    i2 = RCS['clicked'][1]
+                    if RCS['cards'][i1] == RCS['cards'][i2] and i1 != i2:
+                        RCS['cards'][i1], RCS['cards'][i2] = 'none', 'none'
+                    else:
+                        print('Неверно')
+                    RCS['clicked'].clear()
+
+    # @staticmethod
+    # def game_finished():
+    #     count = 0
+    #     for item in RCS['cards']:
+    #         if item == 'none':
+    #             count += 1
+    #             if count == len(RCS['cards']):
+    #
