@@ -3,6 +3,9 @@ RCS = {
     'FPS': 60,
     'img': {
         'background': 'src/bg.png',
+        'back_img': 'cards/back.png',
+    },
+    'card_img': {
         'card_blue': 'cards/blue.png',
         'card_red': 'cards/red.png',
         'card_yellow': 'cards/yellow.png',

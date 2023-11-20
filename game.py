@@ -8,8 +8,6 @@ from config import RCS
 pg.init()
 
 # параметры
-FPS = 60
-screen_width, screen_height = 1600, 900
 pg.mixer.music.load(RCS['sound']['ost'])
 pg.mixer.music.play()
 pg.mixer.music.set_volume(0.3)
@@ -20,6 +18,8 @@ pg.font.SysFont('arial', 36)
 bg_img = pg.image.load('src/bg.png')
 
 # переменные
+ico = pg.image.load('cards/back.png')
+pg.display.set_icon(ico)
 display = pg.display.set_mode(RCS['display'])
 running = True
 clock = pg.time.Clock()
@@ -46,7 +46,7 @@ def event_processing():
                 running = False
         if event.type == pg.MOUSEBUTTONUP:
             main_board.delete_card()
-    clock.tick(FPS)
+    clock.tick(RCS['FPS'])
     return running
 
 

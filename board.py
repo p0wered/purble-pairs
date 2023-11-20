@@ -1,5 +1,4 @@
 import pygame as pg
-from gui.board_view import BoardView
 from config import GEOM, RCS
 
 
@@ -21,12 +20,3 @@ class GameBoard:
                     else:
                         print('Неверно')
                     RCS['clicked'].clear()
-
-    # @staticmethod
-    # def game_finished():
-    #     count = 0
-    #     for item in RCS['cards']:
-    #         if item == 'none':
-    #             count += 1
-    #             if count == len(RCS['cards']):
-    #
