@@ -23,6 +23,9 @@ class BoardView:
             if len(RCS['positions']) < 8:
                 RCS['positions'].append((st_x, st_y))
             current = RCS['card_img'].get(str(item))
-            CardView.draw(display, current, st_x, st_y)
+            if RCS['cards'].index(item) in RCS['clicked']:
+                CardView.draw_selected(display, current, st_x, st_y)
+            else:
+                CardView.draw_back(display, current, st_x, st_y)
             st_x += w + 10
 

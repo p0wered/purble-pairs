@@ -12,9 +12,18 @@ class CardView:
         self.y = y
 
     @staticmethod
-    def draw(display: pg.Surface, image_src, x, y):
+    def draw_selected(display: pg.Surface, image_src, x, y):
         if image_src is not None:
             image = pg.image.load(image_src)
             display.blit(image, (x, y))
         else:
             display.blit(pg.Surface((128, 128), pg.SRCALPHA), (x, y))
+
+    @staticmethod
+    def draw_back(display: pg.Surface, image_src, x, y):
+        if image_src is not None:
+            back = pg.image.load(RCS['img']['back_img'])
+            display.blit(back, (x, y))
+        else:
+            display.blit(pg.Surface((128, 128), pg.SRCALPHA), (x, y))
+
