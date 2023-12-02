@@ -1,9 +1,12 @@
 RCS = {
-    'display': (1366, 768),
+    'display_width': 1366,
+    'display_height': 768,
     'FPS': 60,
+    'mode': 0,
     'img': {
         'background': 'src/bg.png',
         'back_img': 'cards/back.png',
+        'logo': 'src/logo.png',
     },
     'card_img': {
         'card_b1': 'cards/blue.png',
@@ -20,10 +23,14 @@ RCS = {
     },
     'cards': [],
     'positions': [],
-    'clicked': []
+    'clicked': [],
+    'play': [],
+    'rules': [],
+    'quit': []
 }
 
 GEOM = {
     'card_width': 128,
     'card_height': 128,
 }
+
