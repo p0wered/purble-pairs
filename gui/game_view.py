@@ -17,7 +17,7 @@ class GameView:
 
     def render_menu(self, display: pg.Surface):
         display.blit(self.bg_img, (0, 0))
-        display.blit(self.logo_img, (55, 180))
+        display.blit(self.logo_img, (45, 180))
 
         text_play = self.font_title.render('Играть', True, (255, 255, 255))
         display.blit(text_play, (75, 320))

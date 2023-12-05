@@ -10,16 +10,16 @@ class BoardView:
         self.height = GEOM['card_height']
 
     def render(self, display: pg.Surface):
-        """Выводит на экран сетку карточек 2х4 в случайном порядке"""
-        st_x, st_y, cycle = 261, 244, 0
+        """Выводит на экран сетку карточек 4х4 в случайном порядке"""
+        st_x, st_y, cycle = 30, 30, 0
         for item in RCS['cards']:
             if cycle // 4 in [1, 2, 3, 4]:
-                st_x = 261
+                st_x = 30
                 st_y += self.height + 10
                 cycle = 0
             cycle += 1
             item = str(item)
-            if len(RCS['positions']) < 8:
+            if len(RCS['positions']) < 16:
                 RCS['positions'].append((st_x, st_y))
             current = RCS['card_img'].get(str(item))
             if RCS['cards'].index(item) in RCS['clicked']:

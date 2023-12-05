@@ -29,7 +29,7 @@ class Application:
                 self.running = False
 
             if event.type == pg.MOUSEBUTTONUP:
-                self.board.delete_card()
+                self.board.delete_card(self.display)
 
                 if play_col.collidepoint(pos):
                     RCS['mode'] = 2
@@ -49,7 +49,7 @@ class Application:
                 self.running = False
 
             if event.type == pg.MOUSEBUTTONUP:
-                self.board.delete_card()
+                self.board.delete_card(self.display)
 
         self.clock.tick(RCS['FPS'])
 
@@ -60,7 +60,7 @@ class Application:
                 self.running = False
 
             if event.type == pg.MOUSEBUTTONUP:
-                self.board.delete_card()
+                self.board.delete_card(self.display)
 
         self.clock.tick(RCS['FPS'])
 
