@@ -3,7 +3,8 @@ from config import RCS
 
 
 class GameCard:
-    all_types = ['ct1', 'ct2', 'ee1', 'ee2', 'pc1', 'pc2', 'pn1', 'pn2', 'vl1', 'vl2', 'vn1', 'vn2', 'if1', 'if2', 'eo1', 'eo2']
+    all_types = ['ct1', 'ct2', 'ee1', 'ee2', 'pc1', 'pc2', 'pn1', 'pn2', 'vl1', 'vl2', 'vn1', 'vn2', 'if1', 'if2',
+                 'eo1', 'eo2', 'ce1', 'ce2', 'ey1', 'ey2']
 
     def __init__(self, card_type):
         self.card_type = card_type
@@ -14,7 +15,10 @@ class GameCard:
     @staticmethod
     def create(c_type):
         """"Создаёт карту по названию типа"""
-        return GameCard(c_type)
+        if c_type in GameCard.all_types:
+            return GameCard(c_type)
+        else:
+            raise ValueError
 
     @staticmethod
     def card_list(text: str):

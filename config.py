@@ -25,16 +25,30 @@ RCS = {
         'card_if2': 'cards/interfacing.png',
         'card_eo1': 'cards/electro.png',
         'card_eo2': 'cards/electro.png',
+        'card_ce1': 'cards/composure.png',
+        'card_ce2': 'cards/composure.png',
+        'card_ey1': 'cards/empathy.png',
+        'card_ey2': 'cards/empathy.png',
     },
     'sound': {
         'ost': 'src/disco.mp3'
     },
+
     'cards': [],
     'positions': [],
     'clicked': [],
+    'moves': 0,
+    'found': 0
+
+}
+
+COL = {
     'play': [],
     'rules': [],
-    'quit': []
+    'quit': [],
+    'back': [],
+    'replay': [],
+    'main': []
 }
 
 GEOM = {

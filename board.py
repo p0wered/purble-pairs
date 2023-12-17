@@ -6,6 +6,7 @@ from card import GameCard
 
 
 class GameBoard:
+
     @staticmethod
     def delete_card(display: pg.Surface):
         """Удаляет две выбранные одинаковые карточки"""
@@ -13,11 +14,8 @@ class GameBoard:
         for i, position in enumerate(RCS['positions']):
             col_card = pg.Rect(position, (GEOM['card_width'], GEOM['card_height']))
 
-            if col_card.collidepoint(pos) and i not in RCS['clicked']:
+            if col_card.collidepoint(pos) and i not in RCS['clicked'] and RCS['cards'][i] != 'none':
                 RCS['clicked'].append(i)
-
-                if RCS['cards'][RCS['clicked'][0]] == 'none':
-                    RCS['clicked'].clear()
 
                 if len(RCS['clicked']) == 2:
                     i1 = RCS['clicked'][0]
@@ -27,6 +25,10 @@ class GameBoard:
                     src1 = RCS['card_img'][img1]
                     src2 = RCS['card_img'][img2]
                     start = timer()
+                    RCS['moves'] += 1
+
+                    if RCS['moves'] >= 15:
+                        RCS['mode'], RCS['moves'], RCS['found'] = 0, 0, 0
 
                     while True:
                         elapsed = timer() - start
@@ -38,3 +40,19 @@ class GameBoard:
                         RCS['cards'][i1], RCS['cards'][i2] = 'none', 'none'
 
                     RCS['clicked'].clear()
+
+    @staticmethod
+    def stats():
+        end_list = []
+        found = 0
+
+        for k in range(20):
+            end_list.append('none')
+
+        for item in RCS['cards']:
+            if RCS['cards'] == end_list:
+                RCS['mode'], RCS['moves'], RCS['found'] = 0, 0, 0
+            if item == 'none':
+                found += 1
+                if found >= 2:
+                    RCS['found'] = int(found / 2)
