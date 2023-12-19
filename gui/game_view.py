@@ -39,7 +39,7 @@ class GameView:
         display.blit(self.font_bold.render('Правила игры Disco Pairs', True, (255, 255, 255)), (50, 50))
         display.blit(self.font_medium.render('Цель игры - найти все совпадающие по мотиву картинки и собрать их в пары', True, (255, 255, 255)), (50, 125))
         display.blit(self.font_medium.render('Каждый ход игрок выбирает две карты для открытия', True, (255, 255, 255)), (50, 200))
-        display.blit(self.font_medium.render('Ходы игрока ограничены по времени и числу попыток', True, (255, 255, 255)), (50, 275))
+        display.blit(self.font_medium.render('Ходы игрока ограничены по числу попыток', True, (255, 255, 255)), (50, 275))
 
         text_back = self.font_bold.render('< Назад', True, (255, 255, 255))
         display.blit(text_back, (50, self.height - 100))
@@ -47,13 +47,27 @@ class GameView:
         if len(COL['back']) == 0:
             COL['back'] = [50, self.height - 100, text_back.get_width(), text_back.get_height()]
 
-    def render_game(self, display: pg.Surface):
+    def render_game(self, display: pg.Surface, visible):
         display.blit(self.bg_img, (0, 0))
-        self.board_view.render(display)
-        display.blit(self.font_bold.render(f'Количество ходов: {str(RCS["moves"])} / 15', True, (255, 255, 255)), (660, 80))
-        display.blit(self.font_bold.render(f'Найдено пар: {str(RCS["found"])} / 15', True, (255, 255, 255)), (660, 180))
+        self.board_view.render(display, visible)
+        display.blit(self.font_bold.render(f'Количество ходов: {str(RCS["moves"])} / 25', True, (255, 255, 255)), (660, 80))
+        display.blit(self.font_bold.render(f'Найдено пар: {str(RCS["found"])} / 10', True, (255, 255, 255)), (660, 180))
 
-    def render_replay(self, display: pg.Surface):
-        text_play = self.font_title.render('Игра завершена', True, (255, 255, 255))
-        display.blit(text_play, (75, 320))
+    def render_replay(self, display: pg.Surface, parse):
+        display.blit(self.bg_img, (0, 0))
+        display.blit(self.font_title.render('Игра завершена', True, (255, 255, 255)), (75, 75))
+        if RCS['status'] == 'win':
+            display.blit(self.font_bold.render(f'За {RCS["moves"]} ходов', True, (255, 255, 255)), (75, 175))
+            display.blit(self.font_bold.render(f'Рекорд: {parse} ходов', True, (255, 255, 255)), (75, 275))
+        elif RCS['status'] == 'lose':
+            display.blit(self.font_bold.render(f'Вы не собрали все пары', True, (255, 255, 255)), (75, 175))
 
+        text_replay = self.font_bold.render('Начать заново', True, (255, 255, 255))
+        display.blit(text_replay, (75, self.height - 220))
+
+        text_main = self.font_bold.render('Выйти в меню', True, (255, 255, 255))
+        display.blit(text_main, (75, self.height - 120))
+
+        if len(COL['replay']) == 0 and len(COL['main']) == 0:
+            (COL['replay']) = [75, self.height - 220, text_replay.get_width(), text_replay.get_height()]
+            (COL['main']) = [75, self.height - 120, text_main.get_width(), text_main.get_height()]

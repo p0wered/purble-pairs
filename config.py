@@ -38,7 +38,9 @@ RCS = {
     'positions': [],
     'clicked': [],
     'moves': 0,
-    'found': 0
+    'found': 0,
+    'time': 120,
+    'status': ''
 
 }
 

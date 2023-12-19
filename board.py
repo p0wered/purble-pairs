@@ -27,8 +27,9 @@ class GameBoard:
                     start = timer()
                     RCS['moves'] += 1
 
-                    if RCS['moves'] >= 15:
-                        RCS['mode'], RCS['moves'], RCS['found'] = 0, 0, 0
+                    if RCS['moves'] >= 25:
+                        RCS['status'] = 'lose'
+                        RCS['mode'] = 3
 
                     while True:
                         elapsed = timer() - start
@@ -43,15 +44,28 @@ class GameBoard:
 
     @staticmethod
     def stats():
+        import json
         end_list = []
         found = 0
+
+        with open('userdata.json') as f:
+            data = json.load(f)
+            record = data['record']
 
         for k in range(20):
             end_list.append('none')
 
         for item in RCS['cards']:
+
             if RCS['cards'] == end_list:
-                RCS['mode'], RCS['moves'], RCS['found'] = 0, 0, 0
+                result = RCS['moves']
+                if result < record:
+                    data['record'] = result
+                    with open('userdata.json', 'w') as f:
+                        json.dump(data, f)
+                RCS['status'] = 'win'
+                RCS['mode'] = 3
+
             if item == 'none':
                 found += 1
                 if found >= 2:
