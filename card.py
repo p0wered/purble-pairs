@@ -22,7 +22,7 @@ class GameCard:
 
     @staticmethod
     def card_list(text: str):
-        """ Из строки вида 'blue red yellow purple' возвращает список соответствующих карт"""
+        """ Из строки вида 'ct1 ee2 pn1' возвращает список соответствующих карт"""
         return [GameCard.create(word) for word in text.split()]
 
     @staticmethod

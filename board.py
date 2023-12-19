@@ -27,14 +27,10 @@ class GameBoard:
                     start = timer()
                     RCS['moves'] += 1
 
-                    if RCS['moves'] >= 25:
-                        RCS['status'] = 'lose'
-                        RCS['mode'] = 3
-
                     while True:
                         elapsed = timer() - start
                         CardView.draw_two(display, src1, src2, i1, i2)
-                        if elapsed > 1:
+                        if elapsed > 0.6:
                             break
 
                     if GameCard.compare(i1, i2):
@@ -43,7 +39,8 @@ class GameBoard:
                     RCS['clicked'].clear()
 
     @staticmethod
-    def stats():
+    def stats(moves):
+        """Статистика игровой сессии"""
         import json
         end_list = []
         found = 0
@@ -54,6 +51,10 @@ class GameBoard:
 
         for k in range(20):
             end_list.append('none')
+
+        if moves >= 25:
+            RCS['status'] = 'lose'
+            RCS['mode'] = 3
 
         for item in RCS['cards']:
 

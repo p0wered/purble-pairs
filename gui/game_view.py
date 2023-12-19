@@ -60,7 +60,7 @@ class GameView:
             display.blit(self.font_bold.render(f'За {RCS["moves"]} ходов', True, (255, 255, 255)), (75, 175))
             display.blit(self.font_bold.render(f'Рекорд: {parse} ходов', True, (255, 255, 255)), (75, 275))
         elif RCS['status'] == 'lose':
-            display.blit(self.font_bold.render(f'Вы не собрали все пары', True, (255, 255, 255)), (75, 175))
+            display.blit(self.font_bold.render(f'Вы собрали не все пары', True, (255, 255, 255)), (75, 175))
 
         text_replay = self.font_bold.render('Начать заново', True, (255, 255, 255))
         display.blit(text_replay, (75, self.height - 220))

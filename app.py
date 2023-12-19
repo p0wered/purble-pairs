@@ -124,7 +124,7 @@ class Application:
                     RCS['moves'], RCS['found'] = 0, 0
                     rebuild = False
                 self.game_view.render_game(self.display, elapsed)
-                self.board.stats()
+                self.board.stats(RCS['moves'])
                 if elapsed > 1.5:
                     self.event_check_game()
 
@@ -136,3 +136,7 @@ class Application:
             pg.display.update()
 
         pg.quit()
+
+
+app = Application()
+app.run()
